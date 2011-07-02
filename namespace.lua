@@ -1,7 +1,9 @@
 function namespace(str)
-    local ns = _G -- starts with the global table
-    local last_part
-    for part, dot in string.gfind(str, "([%w_]+)(.?)") do  -- I can't find a split-like function
+    local ns = _G   -- starts with the global table
+    local last_part -- will contain the name of the last table
+    
+    -- I can't find a split-like function, inspired by http://www.lua.org/pil/14.1.html
+    for part, dot in string.gfind(str, "([%w_]+)(.?)") do
         if dot == '.' then
             ns[part] = ns[part] or {}
             ns = ns[part]
