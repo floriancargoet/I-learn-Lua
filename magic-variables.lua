@@ -19,15 +19,15 @@ global_mt.__index = function(t,k)
 end
 
 global_mt.now = function() 
-return os.time()
+    return os.time()
 end
 
 global_mt.source = function()
-return debug.getinfo(3,'S').source
+    return debug.getinfo(3,'S').source
 end
 
 global_mt.line = function()
-return debug.getinfo(3, 'l').currentline
+    return debug.getinfo(3, 'l').currentline
 end
 
 print(now)
