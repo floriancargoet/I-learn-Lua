@@ -20,24 +20,24 @@ end
 
 --[[ tests
 local circle = {
-    draw = function() print('circle') end
+    draw = function(color) print(color..' circle') end
 }
 local square = {
-    draw = function() print('square') end
+    draw = function(color) print(color..' square') end
 }
 local triangle = {
-    draw = function() print('triangle') end
+    draw = function(color) print(color..' triangle') end
 }
 
 local groupOfShapes = Composite(circle, square, triangle)
-groupOfShapes.draw()
+groupOfShapes.draw('red')
 
 local ellipse = {
-    draw = function() print('ellipse') end
+    draw = function(color) print(color..' ellipse') end
 }
 
 local not_drawable = {} -- will be ignored silently
 
 local biggerGroup = Composite(ellipse, not_drawable, groupOfShapes) -- nested composite
-biggerGroup.draw()
+biggerGroup.draw('green')
 --]]
