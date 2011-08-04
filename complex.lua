@@ -16,6 +16,7 @@ setmetatable(Complex, {
 
 -- math metamethods
 function Complex.__eq(a, b)
+    -- too bad we cannot compare with numbers
     return a.re == b.re and a.im == b.im
 end
 
@@ -61,37 +62,36 @@ function Complex:inv()
     return Complex:new(a/c2, -b/c2)
 end
 
--- nice string representation
+-- nice string representation (see tests for examples)
 function Complex:__tostring()
-    --TODO better (like  1+1i => 1+i, 0+2i => 2i...)
-    local s = ''..self.re
+    local re, im = self.re, self.im
 
-    if self.im ~= 0 then
-        if self.im >= 0 then
-            s = s..'+'
-        end
-        s = s..self.im..'i'
+    -- case 0
+    if im == 0 and re == 0 then
+        return '0'
     end
-    
-    return s
+
+    -- stringify real part
+    local sre = (re == 0 and '' or tostring(re))
+
+    local sim
+
+    if im == 0 then -- pure real
+        sim = ''
+    elseif im == 1 then -- special case i
+        sim = 'i'
+    elseif im == -1 then -- special case -i
+        sim = '-i'
+    else
+        sim = im..'i'
+    end
+
+    if im > 0 and re ~= 0 then -- add + symbol if needed
+        return sre..'+'..sim
+    else
+        return sre..sim
+    end
 end
 
 -- the i symbol
 Complex.i = Complex(0, 1)
-
-
--- TODO: use a real test framework
-local a = Complex:new(0, 0)
-local b = Complex:new(1, 2)
-local c = Complex(0, -2) -- alternate syntax
-local d = Complex(-1, 0)
-
-print(a, b, c, d)
-print(a == b + c + d) -- true
-
--- tests to write
--- C() <=> C:create()
--- eq
--- ops
--- i symbol
--- tostring
