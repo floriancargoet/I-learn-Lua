@@ -137,11 +137,20 @@ function test_absolute_value()
   assert_equal(math.sqrt(2), b:abs())
 end
 
+
+function test_expressivity_with_i()
+  --with the i symbol, we don't need constructors anymore
+  local i = Complex.i
+  local a = 2 - (2-i)*(-1+7*i)
+  local b = 2 - Complex(2, -1) * Complex(-1, 7)
+  
+  assert_equal(a, b)
+end
+
 -- helper
 local my_assert = function(str, re, im)
   assert_equal(str, tostring(Complex(re, im)))
 end 
-
 
 function test_tostring_standard()
   my_assert( '1+2i',  1,  2)
