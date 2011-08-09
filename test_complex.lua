@@ -89,6 +89,17 @@ function test_multiplication_with_numbers()
   assert_equal(b, a * 2)
 end
 
+function test_exponentiation()
+  local a = Complex(2, 3)
+
+  assert_equal(   a*a*a, a ^  3)
+  assert_equal( 1/(a*a), a ^ -2)
+  assert_equal(       1, a ^  0)
+
+  -- only integer exponent are allowed
+  assert_error(function() return a^1.1 end)
+end
+
 function test_division()
   local a = Complex(2, 3)
   local b = Complex(-1, 2)
@@ -109,6 +120,21 @@ function test_inversion()
   local b = Complex(2/13, -3/13)
 
   assert_equal(a, b)
+end
+
+function test_conjugation()
+  local a = Complex(2, 3)
+  local a_conj = Complex(2, -3)
+
+  assert_equal(a_conj, a:conj())
+end
+
+function test_absolute_value()
+  local a = Complex(3, 4)
+  local b = Complex(-1, -1)
+
+  assert_equal(5, a:abs())
+  assert_equal(math.sqrt(2), b:abs())
 end
 
 -- helper

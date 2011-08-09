@@ -39,6 +39,20 @@ function Complex.__mul(a, b)
   return Complex:new(ar * br - ai * bi, ar * bi + ai * br)
 end
 
+function Complex.__pow(a, b)
+  if type(b) ~= 'number' or b ~= math.floor(b) then
+    error("Exponent must be an integer "..b, 2)
+  end
+  if b == 0 then
+    return 1
+  end
+  if b < 0 then
+    return 1 / a^(-b)
+  else
+    return a * a^(b-1) -- recursive
+  end
+end
+
 function Complex.__sub(a, b)
   return a + (-b)
 end
@@ -60,6 +74,18 @@ function Complex:inv()
   local a, b = self.re, self.im
   local c2 = a*a + b*b
   return Complex:new(a/c2, -b/c2)
+end
+
+-- conjuguate
+function Complex:conj()
+  local a, b = self.re, self.im
+  return Complex:new(a, -b)
+end
+
+-- absolute value
+function Complex:abs()
+  local a, b = self.re, self.im
+  return math.sqrt(a*a + b*b)
 end
 
 -- nice string representation (see tests for examples)
