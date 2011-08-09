@@ -38,10 +38,10 @@ function test_equality()
 end
 
 function test_addition()
-  local a = Complex(0, 0)
-  local b = Complex(1, 2)
-  local c = Complex(0, -2)
-  local d = Complex(-1, 0)
+  local a = Complex( 0,  0)
+  local b = Complex( 1,  2)
+  local c = Complex( 0, -2)
+  local d = Complex(-1,  0)
 
   assert_equal(a, b + c + d)
 end
@@ -68,14 +68,14 @@ function test_substraction_with_numbers()
 end
 
 function test_unary_minus()
-  local a = Complex(1, 1)
+  local a = Complex( 1,  1)
   local b = Complex(-1, -1)
 
   assert_equal(a, -b)
 end
 
 function test_multiplication()
-  local a = Complex(2, 3)
+  local a = Complex( 2, 3)
   local b = Complex(-1, 2)
   local c = Complex(-8, 1)
 
@@ -101,7 +101,7 @@ function test_exponentiation()
 end
 
 function test_division()
-  local a = Complex(2, 3)
+  local a = Complex( 2, 3)
   local b = Complex(-1, 2)
   local c = Complex(-8, 1)
 
@@ -123,14 +123,14 @@ function test_inversion()
 end
 
 function test_conjugation()
-  local a = Complex(2, 3)
+  local a      = Complex(2,  3)
   local a_conj = Complex(2, -3)
 
   assert_equal(a_conj, a:conj())
 end
 
 function test_absolute_value()
-  local a = Complex(3, 4)
+  local a = Complex(3 ,  4)
   local b = Complex(-1, -1)
 
   assert_equal(5, a:abs())
