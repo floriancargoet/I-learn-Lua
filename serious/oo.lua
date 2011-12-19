@@ -1,7 +1,6 @@
 -- simple class-like system
 -- features:
 --   - inheritance (sublasses, is_a, "super")
---   - mixins
 --   - static (just put stuff in the class table)
 --   - base class Object
 -- notes:
@@ -42,29 +41,4 @@ function Object:is_a(Class)
     class = class.super
   end
   return false
-end
-
-function Object:mixin(class, ...) -- type: table, string...
-    local source
-    -- gather properties to be copied
-    if arg[1] then
-        -- only mixin certain methods/properties
-        source = {}
-        for i, name in ipairs(arg) do
-            source[name] = self[name]
-        end
-    else
-        -- copy all
-        source = self
-    end
-
-    -- copy methods/properties
-    for name, prop in pairs(source) do
-        if class[name] then
-            error("Property "..name.." already exists!", 2)
-        else
-            class[name] = prop
-        end
-    end
-    return class
 end

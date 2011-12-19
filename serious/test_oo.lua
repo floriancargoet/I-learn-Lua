@@ -97,8 +97,3 @@ function test_super()
     Cat:new():what()
   )
 end
-
-function test_mixin()
-  fail()
-end
-
